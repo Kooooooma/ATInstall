@@ -25,9 +25,9 @@ echo -e $BOTTOM_MARK
 
 read -p " please select whitch item of extension u want to install:  " itemIdx
 
-if [ "$itemIdx" -eq 1 ];
+if [ "$itemIdx" -eq 1 ];then
     extpath="$SCRIPT_EXT_PATH"/nginx
-elif [ "$itemIdx" -eq 2 ];
+elif [ "$itemIdx" -eq 2 ];then
     extpath="$SCRIPT_EXT_PATH"/php
 else
     echo -e $TOP_MARK
