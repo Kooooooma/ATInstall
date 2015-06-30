@@ -1,0 +1,37 @@
+#!/bin/bash
+#chkconfig:2345 85 15
+#
+# @author zhangqiang<komazhang@foxmail.com>
+# @date   2015.06.30 17:30:28
+
+FPM_EXEC=''
+FPM_PID=''
+if [ "$1" == "start" ];then
+    $FPM_EXEC
+    if [ $? -eq 0 ];then
+        echo " php-fpm start...                     [OK] "
+    else
+        echo " php-fpm start...                     [Faild] "
+        exit 1
+    fi
+elif [ "$1" == "stop" ];then
+    kill -INT `cat ${FPM_PID}`
+    if [ $? -eq 0 ];then
+        echo " php-fpm stop...                     [OK] "
+    else
+        echo " php-fpm stop...                     [Faild] "
+        exit 1
+    fi
+elif [ "$1" == "restart" ];then
+    kill -USR2 `cat ${FPM_PID}`
+    if [ $? -eq 0 ];then
+        echo " php-fpm restart...                     [OK] "
+    else
+        echo " php-fpm restart...                     [Faild] "
+        exit 1
+    fi
+else
+    echo " command args not defined. "
+    exit 1
+fi
+exit 0
