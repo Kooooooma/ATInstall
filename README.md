@@ -17,9 +17,9 @@ when the script is run, first it will ask u to install the common depend package
 at last, happy for ur life!
 
 
-useage：
-su root    --  this need u have the root permission
-cd ATInstall
-./install.sh
+useage：<br/>
+su root    --  this need u have the root permission<br/>
+cd ATInstall<br/>
+./install.sh<br/>
 
 for ur first to use it, u'd better read the tips careful!
