@@ -20,6 +20,7 @@ at last, happy for ur life!
 
 useage：<br/>
 su root    --  this need u have the root permission<br/>
+git clone https://github.com/KomaBeyond/ATInstall.git<br/>
 cd ATInstall<br/>
 ./install.sh<br/>
 
