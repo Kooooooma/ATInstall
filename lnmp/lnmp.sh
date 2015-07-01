@@ -35,7 +35,7 @@ case $itemIdx in
     1)
         echo > "$MYSQL_INSTALL_LOG"
 
-        if [ $INSTALL_MODE -eq ${CUSTOM_MODE} ];then
+        if [ ${INSTALL_MODE} -eq ${CUSTOM_MODE} ];then
             echo -e $BR
             read -p "please input the mysql install dir: " MYSQL_INSTALL_PATH
         else
