@@ -34,8 +34,13 @@ read -p " please select whitch item u want to install:  " itemIdx
 case $itemIdx in
     1)
         echo > "$MYSQL_INSTALL_LOG"
-        echo -e $BR
-        read -p "please input the mysql install dir: " MYSQL_INSTALL_PATH
+
+        if [ ${INSTALL_MODE} -eq ${CUSTOM_MODE} ];then
+            echo -e $BR
+            read -p "please input the mysql install dir: " MYSQL_INSTALL_PATH
+        else
+            MYSQL_INSTALL_PATH="mysql"
+        fi
         
         MYSQL_INSTALL_PATH="$INSTALL_PATH"/"$MYSQL_INSTALL_PATH"
 
@@ -58,8 +63,13 @@ case $itemIdx in
     ;;
     2)
         echo > "$HTTPD_INSTALL_LOG"
-        echo -e $BR
-        read -p "please input the apache install dir: " HTTPD_INSTALL_PATH
+        
+        if [ ${INSTALL_MODE} -eq ${CUSTOM_MODE} ];then
+            echo -e $BR
+            read -p "please input the apache install dir: " HTTPD_INSTALL_PATH
+        else
+            HTTPD_INSTALL_PATH="httpd"
+        fi
         
         HTTPD_INSTALL_PATH="$INSTALL_PATH"/"$HTTPD_INSTALL_PATH"
 
@@ -81,9 +91,15 @@ case $itemIdx in
     ;;
     3)
         echo > "$PHP_INSTALL_LOG"
-        echo -e $BR
-        read -p "please input the php install dir: " PHP_INSTALL_PATH
-        read -p "please input the apache install dir: " HTTPD_INSTALL_PATH
+
+        if [ ${INSTALL_MODE} -eq ${CUSTOM_MODE} ];then
+            echo -e $BR
+            read -p "please input the php install dir: " PHP_INSTALL_PATH
+            read -p "please input the apache install dir: " HTTPD_INSTALL_PATH
+        else
+            PHP_INSTALL_PATH="php"
+            HTTPD_INSTALL_PATH="httpd"
+        fi
         
         PHP_INSTALL_PATH="$INSTALL_PATH"/"$PHP_INSTALL_PATH"
         HTTPD_INSTALL_PATH="$INSTALL_PATH"/"$HTTPD_INSTALL_PATH"
@@ -111,10 +127,17 @@ case $itemIdx in
         echo > "$MYSQL_INSTALL_LOG"
         echo > "$HTTPD_INSTALL_LOG"
         echo > "$PHP_INSTALL_LOG"
-        echo -e $BR
-        read -p "please input the apache install dir: " HTTPD_INSTALL_PATH
-        read -p "please input the mysql install dir: " MYSQL_INSTALL_PATH
-        read -p "please input the php install dir: " PHP_INSTALL_PATH
+        
+        if [ ${INSTALL_MODE} -eq ${CUSTOM_MODE} ];then
+            echo -e $BR
+            read -p "please input the apache install dir: " HTTPD_INSTALL_PATH
+            read -p "please input the mysql install dir: " MYSQL_INSTALL_PATH
+            read -p "please input the php install dir: " PHP_INSTALL_PATH
+        else
+            HTTPD_INSTALL_PATH="httpd"
+            MYSQL_INSTALL_PATH="mysql"
+            PHP_INSTALL_PATH="php"
+        fi
         
         HTTPD_INSTALL_PATH="$INSTALL_PATH"/"$HTTPD_INSTALL_PATH"
         MYSQL_INSTALL_PATH="$INSTALL_PATH"/"$MYSQL_INSTALL_PATH"

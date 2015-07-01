@@ -120,7 +120,58 @@ export SCRIPT_SPHINX_PATH
 export SCRIPT_NOSQL_FILE
 export SCRIPT_NOSQL_PATH
 export LOG_FILE_PATH
+
+declare -i DEFAULT_MODE=1
+declare -i CUSTOM_MODE=2
+
+#set the install mode
+echo -e $TOP_MARK
+echo " default mode --- ${DEFAULT_MODE} "
+echo " custom mode  --- ${CUSTOM_MODE} "
+echo -e $BR
+echo " there has two mode for ur chose about the install path "
+echo " in default mode the base install path and the package install path u could'n to change it again"
+echo " in custom mode the base install path and the package install path u need to set it for urself"
+echo -e $BOTTOM_MARK
+declare -i mode=0
+read -p " please select the mode u want: " mode
+
+if [ ${mode} -eq ${DEFAULT_MODE} ]; then
+    INSTALL_PATH="/usr/local"
+elif [ ${mode} -eq ${CUSTOM_MODE} ]; then
+    echo -e $TOP_MARK
+    read -p " u chose the custom mode, please input the base install path(do not end with '/'): " base_install_path
+    if [ "$base_install_path" == "" ];then
+        echo -e $TOP_MARK
+        echo " please input a right path string "
+        echo -e $BOTTOM_MARK
+        exit 1
+    fi
+    if [ ! -d "$base_install_path" ];then
+        echo -e $BR
+        read -p " the directory is not exists, if u want to creat it please input [yes] or [no]: " isY
+        if [ "$isY" == "yes" ];then
+            mkdir "$base_install_path"
+            INSTALL_PATH="$base_install_path"
+        else
+            echo -e $TOP_MARK
+            echo " input a wrong install dir "
+            echo -e $BOTTOM_MARK
+            exit 1
+        fi
+    fi
+else
+    echo -e $TOP_MARK
+    echo " please input a right num "
+    echo -e $BOTTOM_MARK
+    exit 1
+fi
+
+INSTALL_MODE=$mode
+export INSTALL_MODE
 export INSTALL_PATH
+export DEFAULT_MODE
+export CUSTOM_MODE
 
 echo -e $TOP_MARK
 echo " install LAMP      --- please input 1"
@@ -128,13 +179,13 @@ echo " install LNMP      --- please input 2"
 echo " install NoSQL     --- please input 3"
 echo " install Sphinx    --- please input 4"
 echo " install extension --- please input 5"
+echo -e $BR
+echo "     Notice! the install base path is [ $INSTALL_PATH ] "
 echo -e $BOTTOM_MARK
 
 declare -i itemIdx=0
 read -p "Please select the item whitch u want to exec: " itemIdx
 
-echo "##---------- Notice! the install base path is [ $INSTALL_PATH ] "
-echo -e "##---------- u can change it in the install.sh file if u need. \n"
 case $itemIdx in
     1)
         $SCRIPT_LAMP_FILE

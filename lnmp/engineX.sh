@@ -30,13 +30,7 @@ if [ "$isHave" != "" ];then
 fi
 rm -rf "$NGINX_INSTALL_PATH"
 
-#chose the install item
-echo -e $TOP_MARK
-echo " install nginx   --- 1 "
-echo " install tengine --- 2 "
-echo -e $BOTTOM_MARK
-read -p "  please select whitch package u want to install: " idxItem
-
+idxItem=${NGINX_TYPE}
 #show the list of tar package
 if [ "$idxItem" -eq "1" ];then
     srcpackagedir="$SRC_NGINX_PATH"
