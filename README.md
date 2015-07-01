@@ -15,3 +15,11 @@ that's my wish, it's not complete already.
 when the script is run, first it will ask u to install the common depend package, u can input [yes] or [no] to decide what u want to do, i wanner to say is that the install common package script is in the commonPackageInstall.sh script file, this file use the yum command to install all the package, if ur system doesn't support the command u can edit it and change the command that ur own system can understand the command u have send!
 
 at last, happy for ur life!
+
+
+useage：
+su root    --  this need u have the root permission
+cd ATInstall
+./install.sh
+
+for ur first to use it, u'd better read the tips careful!
