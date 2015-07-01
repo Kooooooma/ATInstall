@@ -1,5 +1,6 @@
 # ATInstall
-this is an auto install shell script for automatic install the LAMP, LN(T)MP in linux system. create by Koma.
+this is an auto install shell script for automatic install the LAMP, LN(T)MP in linux system.<br/>
+——create by Koma.
 
 u can use it to install LAMP, LNMP or LT(Tengine)MP env.
 also u can chose one of them to install, for example, if u chose to install LAMP but u dont't want to install all of them
@@ -15,3 +16,12 @@ that's my wish, it's not complete already.
 when the script is run, first it will ask u to install the common depend package, u can input [yes] or [no] to decide what u want to do, i wanner to say is that the install common package script is in the commonPackageInstall.sh script file, this file use the yum command to install all the package, if ur system doesn't support the command u can edit it and change the command that ur own system can understand the command u have send!
 
 at last, happy for ur life!
+
+
+useage：<br/>
+su root    --  this need u have the root permission<br/>
+git clone https://github.com/KomaBeyond/ATInstall.git<br/>
+cd ATInstall<br/>
+./install.sh<br/>
+
+for ur first to use it, u'd better read the tips careful!
