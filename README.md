@@ -1,6 +1,6 @@
 # ATInstall
 this is an auto install shell script for automatic install the LAMP, LN(T)MP in linux system.<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;————create by Koma.
+——create by Koma.
 
 u can use it to install LAMP, LNMP or LT(Tengine)MP env.
 also u can chose one of them to install, for example, if u chose to install LAMP but u dont't want to install all of them
