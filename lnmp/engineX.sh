@@ -48,7 +48,7 @@ fi
 
 if [ "$tarNum" -eq 0 ];then
     echo -e $TOP_MARK
-    echo " there has no package to use. please check!!! "
+    echo " there has no nginx package to use. please check!!! "
     echo -e $BOTTOM_MARK
     exit 1
 fi
@@ -87,19 +87,35 @@ if [ ! -f "$nginx_tarname" ];then
     exit 1
 fi
 
-#print the begin message
-echo -e $TOP_MARK
-echo "  nginx begin to install "
-echo -e $BOTTOM_MARK
-sleep 2
-
 #install the depend package zlib,openssl,pcre
-cd $SRC_LIB_PATH
-tarname="zlib-1.2.8.tar.gz"
-zlib_sourcedir="zlib-1.2.8"
+zlib_path="$SRC_LIB_PATH"/zlib
+if [ ! -d ${zlib_path} ];then
+    mkdir $zlib_path
+fi
+cd $zlib_path
+
+tarNum=$( ls zlib*.tar* | wc -l )
+if [ "$tarNum" -eq 0 ];then
+    echo -e $TOP_MARK
+    echo " there has no zlib package to use. please check!!! "
+    echo -e $BOTTOM_MARK
+    exit 1
+fi
+
+echo -e $TOP_MARK
+for (( i=1; i<=${tarNum}; i++ ))
+do
+    tname=$( ls zlib*.tar* | sed -n "${i}p" )
+    echo " ${tname} --- $i"
+done
+echo -e $BOTTOM_MARK
+read -p "  please chose whitch zlib version u want to install:  " vidx
+
+tarname=$( ls zlib*.tar* | sed -n "${vidx}p" )
+zlib_sourcedir=${tarname%.tar*}
 if [ ! -f "$tarname" ];then
     echo -e $TOP_MARK
-    echo " the $tarname is not exists in $SRC_LIB_PATH"
+    echo " the $tarname is not exists in $zlib_path"
     echo -e $BOTTOM_MARK
     exit 1
 fi
@@ -113,13 +129,36 @@ else
     make
 fi
 make install
-cd ..
 
-tarname="openssl-1.0.1j.tar.gz"
-openssl_sourcedir="openssl-1.0.1j"
+##-----------------------------------------------------------
+openssl_path="$SRC_LIB_PATH"/openssl
+if [ ! -d ${openssl_path} ];then
+    mkdir $openssl_path
+fi
+cd $openssl_path
+
+tarNum=$( ls openssl*.tar* | wc -l )
+if [ "$tarNum" -eq 0 ];then
+    echo -e $TOP_MARK
+    echo " there has no openssl package to use. please check!!! "
+    echo -e $BOTTOM_MARK
+    exit 1
+fi
+
+echo -e $TOP_MARK
+for (( i=1; i<=${tarNum}; i++ ))
+do
+    tname=$( ls openssl*.tar* | sed -n "${i}p" )
+    echo " ${tname} --- $i"
+done
+echo -e $BOTTOM_MARK
+read -p "  please chose whitch openssl version u want to install:  " vidx
+
+tarname=$( ls openssl*.tar* | sed -n "${vidx}p" )
+openssl_sourcedir=${tarname%.tar*}
 if [ ! -f "$tarname" ];then
     echo -e $TOP_MARK
-    echo " the $tarname is not exists in $SRC_LIB_PATH"
+    echo " the $tarname is not exists in $openssl_path"
     echo -e $BOTTOM_MARK
     exit 1
 fi
@@ -133,19 +172,38 @@ else
     make
 fi
 make install
-cd ..
 
-tarname="pcre-8.34.tar.gz"
-pcre_sourcedir="pcre-8.34"
-if [ ! -f "$tarname" ];then
+##-----------------------------------------------------------
+pcre_path="$SRC_LIB_PATH"/pcre
+if [ ! -d ${pcre_path} ];then
+    mkdir $pcre_path
+fi
+cd $pcre_path
+
+tarNum=$( ls pcre*.tar* | wc -l )
+if [ "$tarNum" -eq 0 ];then
     echo -e $TOP_MARK
-    echo " the $tarname is not exists in $SRC_LIB_PATH"
+    echo " there has no pcre package to use. please check!!! "
     echo -e $BOTTOM_MARK
     exit 1
 fi
-hasPcre=$( ll "$INSTALL_PATH" | grep pcre )
-if [ ! "$hasPcre" -eq "" ];then
-    rm -rf "$INSTALL_PATH"/pcre
+
+echo -e $TOP_MARK
+for (( i=1; i<=${tarNum}; i++ ))
+do
+    tname=$( ls pcre*.tar* | sed -n "${i}p" )
+    echo " ${tname} --- $i"
+done
+echo -e $BOTTOM_MARK
+read -p "  please chose whitch pcre version u want to install:  " vidx
+
+tarname=$( ls pcre*.tar* | sed -n "${vidx}p" )
+pcre_sourcedir=${tarname%.tar*}
+if [ ! -f "$tarname" ];then
+    echo -e $TOP_MARK
+    echo " the $tarname is not exists in $pcre_path"
+    echo -e $BOTTOM_MARK
+    exit 1
 fi
 rm -rf "$pcre_sourcedir"
 tar -xzvf "$tarname"
@@ -157,6 +215,12 @@ else
     make
 fi
 make install
+
+#print the begin message
+echo -e $TOP_MARK
+echo "  nginx begin to install "
+echo -e $BOTTOM_MARK
+sleep 2
 
 #change dir to the nginx/tengine src dir
 cd "$srcpackagedir"

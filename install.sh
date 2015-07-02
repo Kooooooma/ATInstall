@@ -124,6 +124,35 @@ export LOG_FILE_PATH
 declare -i DEFAULT_MODE=1
 declare -i CUSTOM_MODE=2
 
+#create all the directory
+if [ ! -d ${SRC_BASE_PATH} ];then
+    mkdir $SRC_BASE_PATH
+fi
+if [ ! -d ${SRC_PHP_PATH} ];then
+    mkdir $SRC_PHP_PATH
+fi
+if [ ! -d ${SRC_NGINX_PATH} ];then
+    mkdir $SRC_NGINX_PATH
+fi
+if [ ! -d ${SRC_TENGINE_PATH} ];then
+    mkdir $SRC_TENGINE_PATH
+fi
+if [ ! -d ${SRC_HTTPD_PATH} ];then
+    mkdir $SRC_HTTPD_PATH
+fi
+if [ ! -d ${SRC_MYSQL_PATH} ];then
+    mkdir $SRC_MYSQL_PATH
+fi
+if [ ! -d ${SRC_LIB_PATH} ];then
+    mkdir $SRC_LIB_PATH
+fi
+if [ ! -d ${SRC_REDIS_PATH} ];then
+    mkdir $SRC_REDIS_PATH
+fi
+if [ ! -d ${SRC_MEMCACHED_PATH} ];then
+    mkdir $SRC_MEMCACHED_PATH
+fi
+
 #set the install mode
 echo -e $TOP_MARK
 echo " default mode --- ${DEFAULT_MODE} "

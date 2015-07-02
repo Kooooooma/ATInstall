@@ -25,6 +25,12 @@ echo -e $BOTTOM_MARK
 
 read -p " please select whitch item of extension u want to install:  " itemIdx
 
+SRC_EXT_PATH=${SCRIPT_EXT_PATH}/extpackage
+export SRC_EXT_PATH
+if [ ! -d ${SRC_EXT_PATH} ];then
+    mkdir $SRC_EXT_PATH
+fi
+
 if [ "$itemIdx" -eq 1 ];then
     "$SCRIPT_EXT_PATH"/enginex_ext.sh
 elif [ "$itemIdx" -eq 2 ];then

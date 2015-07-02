@@ -78,25 +78,41 @@ echo -e "$BR"
 echo " the httpd listen port is: "$port
 echo -e $BOTTOM_MARK
 
-#print the begin message
-echo -e $TOP_MARK
-echo "  apache begin to install "
-echo -e $BOTTOM_MARK
-sleep 2
-
 #install the depend package apr,apr-util,pcre
-cd $SRC_LIB_PATH
-tarname="apr-1.5.0.tar.gz"
-sourcedir="apr-1.5.0"
-if [ ! -f "$tarname" ];then
+apr_path="$SRC_LIB_PATH"/apr
+if [ ! -d ${apr_path} ];then
+    mkdir $apr_path
+fi
+cd $apr_path
+
+tarNum=$( ls apr*.tar* | wc -l )
+if [ "$tarNum" -eq 0 ];then
     echo -e $TOP_MARK
-    echo " the $tarname is not exists in $SRC_LIB_PATH"
+    echo " there has no apr package to use. please check!!! "
     echo -e $BOTTOM_MARK
     exit 1
 fi
-rm -rf "$sourcedir"
+
+echo -e $TOP_MARK
+for (( i=1; i<=${tarNum}; i++ ))
+do
+    tname=$( ls apr*.tar* | sed -n "${i}p" )
+    echo " ${tname} --- $i"
+done
+echo -e $BOTTOM_MARK
+read -p "  please chose whitch apr version u want to install:  " vidx
+
+tarname=$( ls apr*.tar* | sed -n "${vidx}p" )
+apr_sourcedir=${tarname%.tar*}
+if [ ! -f "$tarname" ];then
+    echo -e $TOP_MARK
+    echo " the $tarname is not exists in $apr_path"
+    echo -e $BOTTOM_MARK
+    exit 1
+fi
+rm -rf "$apr_sourcedir"
 tar -xzvf "$tarname"
-cd "$sourcedir"
+cd "$apr_sourcedir"
 ./configure --prefix="$INSTALL_PATH"/apr
 if [ $CPU_NUM -gt 1 ]; then
     make -j$CPU_NUM
@@ -104,19 +120,42 @@ else
     make
 fi
 make install
-cd ..
 
-tarname="apr-util-1.5.2.tar.gz"
-sourcedir="apr-util-1.5.2"
-if [ ! -f "$tarname" ];then
+##-------------------------------------------------------
+apr_util_path="$SRC_LIB_PATH"/apr-util
+if [ ! -d ${apr_util_path} ];then
+    mkdir $apr_util_path
+fi
+cd $apr_util_path
+
+tarNum=$( ls apr-util*.tar* | wc -l )
+if [ "$tarNum" -eq 0 ];then
     echo -e $TOP_MARK
-    echo " the $tarname is not exists in $SRC_LIB_PATH"
+    echo " there has no apr-util package to use. please check!!! "
     echo -e $BOTTOM_MARK
     exit 1
 fi
-rm -rf "$sourcedir"
+
+echo -e $TOP_MARK
+for (( i=1; i<=${tarNum}; i++ ))
+do
+    tname=$( ls apr-util*.tar* | sed -n "${i}p" )
+    echo " ${tname} --- $i"
+done
+echo -e $BOTTOM_MARK
+read -p "  please chose whitch apr-util version u want to install:  " vidx
+
+tarname=$( ls apr-util*.tar* | sed -n "${vidx}p" )
+apr_util_sourcedir=${tarname%.tar*}
+if [ ! -f "$tarname" ];then
+    echo -e $TOP_MARK
+    echo " the $tarname is not exists in $apr_util_path"
+    echo -e $BOTTOM_MARK
+    exit 1
+fi
+rm -rf "$apr_util_sourcedir"
 tar -xzvf "$tarname"
-cd "$sourcedir"
+cd "$apr_util_sourcedir"
 ./configure --prefix="$INSTALL_PATH"/apr-util --with-apr="$INSTALL_PATH"/apr
 if [ $CPU_NUM -gt 1 ]; then
     make -j$CPU_NUM
@@ -124,23 +163,42 @@ else
     make
 fi
 make install
-cd ..
 
-tarname="pcre-8.34.tar.gz"
-sourcedir="pcre-8.34"
-if [ ! -f "$tarname" ];then
+##--------------------------------------------------------
+pcre_path="$SRC_LIB_PATH"/pcre
+if [ ! -d ${pcre_path} ];then
+    mkdir $pcre_path
+fi
+cd $pcre_path
+
+tarNum=$( ls pcre*.tar* | wc -l )
+if [ "$tarNum" -eq 0 ];then
     echo -e $TOP_MARK
-    echo " the $tarname is not exists in $SRC_LIB_PATH"
+    echo " there has no pcre package to use. please check!!! "
     echo -e $BOTTOM_MARK
     exit 1
 fi
-hasPcre=$( ll "$INSTALL_PATH" | grep pcre )
-if [ ! "$hasPcre" -eq "" ];then
-    rm -rf "$INSTALL_PATH"/pcre
+
+echo -e $TOP_MARK
+for (( i=1; i<=${tarNum}; i++ ))
+do
+    tname=$( ls pcre*.tar* | sed -n "${i}p" )
+    echo " ${tname} --- $i"
+done
+echo -e $BOTTOM_MARK
+read -p "  please chose whitch pcre version u want to install:  " vidx
+
+tarname=$( ls pcre*.tar* | sed -n "${vidx}p" )
+pcre_sourcedir=${tarname%.tar*}
+if [ ! -f "$tarname" ];then
+    echo -e $TOP_MARK
+    echo " the $tarname is not exists in $pcre_path"
+    echo -e $BOTTOM_MARK
+    exit 1
 fi
-rm -rf "$sourcedir"
+rm -rf "$pcre_sourcedir"
 tar -xzvf "$tarname"
-cd "$sourcedir"
+cd "$pcre_sourcedir"
 ./configure --prefix="$INSTALL_PATH"/pcre
 if [ $CPU_NUM -gt 1 ]; then
     make -j$CPU_NUM
@@ -148,6 +206,12 @@ else
     make
 fi
 make install
+
+#print the begin message
+echo -e $TOP_MARK
+echo "  apache begin to install "
+echo -e $BOTTOM_MARK
+sleep 2
 
 #change dir to the httpd src dir
 cd $SRC_HTTPD_PATH

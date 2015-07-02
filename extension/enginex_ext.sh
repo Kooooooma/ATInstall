@@ -46,7 +46,10 @@ config_info=${tmp#configure arguments:* }
 rm -rf .tmp
 
 #check the extpath
-extpath="$SCRIPT_EXT_PATH"/extpackage/nginx
+extpath="$SRC_EXT_PATH"/nginx
+if [ ! -d ${extpath} ];then
+    mkdir $extpath
+fi
 pknum=$( ls "$extpath" | wc -l )
 if [ "$pknum" -eq 0 ];then
     echo -e $TOP_MARK
