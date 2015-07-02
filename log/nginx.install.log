@@ -1,1 +1,12 @@
 
+##---------------------------------------------------------------##
+
+ nginx install path is: /usr/local/nginx
+ nginx configure path is: /usr/local/nginx/conf/nginx.conf
+ nginx had add into the chkconfig, u can use the command: service nginx start/stop/restart to control it 
+ or u can use the command: kill -HUP/-QUIT/-TERM `cat /usr/local/nginx/logs/nginx.pid` to control it 
+
+
+   nginx installed successed. Bye ^_^   
+
+##---------------------------------------------------------------##
