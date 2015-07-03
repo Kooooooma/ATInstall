@@ -1,27 +1,35 @@
 # ATInstall
-this is an auto install shell script for automatic install the LAMP, LN(T)MP in linux system.<br/>
-——create by Koma.
+This is an auto install shell script for automatic install the LAMP, LN(T)MP in linux system.  
+**——create by Koma**
 
-u can use it to install LAMP, LNMP or LT(Tengine)MP env.
-also u can chose one of them to install, for example, if u chose to install LAMP but u dont't want to install all of them
-so the script supply u chose intall the Http or Mysql or PHP or Nginx or Tengine only.
-but as u know, if u install the PHP only, u have to install the Web Server first.
+# Main features:
 
-a surprise in the script is that u can chose the different version package to install. u do not need to do anything, just find the right version package u want and then download it and put it in the right directory. all the package is in the src dir, u can check it first when u use. i download some package for test, if it not fit u, u can just do that just like what am i said.
+* Install LAMP/LNMP/LT(Tengine)MP automatic
+* Chose the package version by urself, only u need to do is put the defferent version tar-package into the ***src*** directory
+* Support install Mysql,PHP,Nginx,Tengine only
+* Add the service into the system boot list when install is done
+* Control easily, just use this one command: service nginx/mysql/php-fpm start/stop/restart
 
-for someday, the script also will help u to install the extension for nginx/tengine or php.
-also it will help u install the NoSQL package and Sphinx automatic.
-that's my wish, it's not complete already.
+# Future features:
 
-when the script is run, first it will ask u to install the common depend package, u can input [yes] or [no] to decide what u want to do, i wanner to say is that the install common package script is in the commonPackageInstall.sh script file, this file use the yum command to install all the package, if ur system doesn't support the command u can edit it and change the command that ur own system can understand the command u have send!
+* Install the nginx extension automatic (This is what am i doing now)
+* Install the Sphinx+coreseek automatic
+* Install the NoSql package automatic
 
-at last, happy for ur life!
+# Attentions:
 
+When the script is run, first it will ask u to install the common depend package, u can input [yes] or [no] to decide what u want to do, i wanner to say is that the install common package script is in the ***commonPackageInstall.sh*** script file, this file use the yum command to install all the package, if ur system doesn't support the command u can edit it and change the command that ur own system can understand the command u have send!
 
-useage：<br/>
-su root    --  this need u have the root permission<br/>
-git clone https://github.com/KomaBeyond/ATInstall.git<br/>
-cd ATInstall<br/>
-./install.sh<br/>
+__At last, happy for ur life!__
 
-for ur first to use it, u'd better read the tips careful!
+# useage：
+
+```bash
+su root
+git clone https://github.com/KomaBeyond/ATInstall.git
+cd ATInstall
+./install.sh
+```
+
+---
+For ur first to use it, u'd better to read the tips careful!
