@@ -16,7 +16,7 @@ This is an auto install shell script for automatic install the LAMP, LN(T)MP in 
 * Install the Sphinx+coreseek automatic
 * Install the NoSql package automatic
 
-# Attentions:
+# Attention:
 
 When the script is run, first it will ask u to install the common depend package, u can input [yes] or [no] to decide what u want to do, i wanner to say is that the install common package script is in the ***commonPackageInstall.sh*** script file, this file use the yum command to install all the package, if ur system doesn't support the command u can edit it and change the command that ur own system can understand the command u have send!
 
