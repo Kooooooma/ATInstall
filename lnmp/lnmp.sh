@@ -180,7 +180,7 @@ case $itemIdx in
         echo " install nginx   --- 1 "
         echo " install tengine --- 2 "
         echo -e $BOTTOM_MARK
-        read -p "  please select whitch nginx package u want to install: " idxItem
+        read -p "  please select whitch type of nginx u want to install: " idxItem
         
         if [ "$idxItem" -eq 1 ];then
             NGINX_TYPE=1
