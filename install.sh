@@ -181,7 +181,6 @@ elif [ ${mode} -eq ${CUSTOM_MODE} ]; then
         read -p " the directory is not exists, if u want to creat it please input [yes] or [no]: " isY
         if [ "$isY" == "yes" ];then
             mkdir "$base_install_path"
-            INSTALL_PATH="$base_install_path"
         else
             echo -e $TOP_MARK
             echo " input a wrong install dir "
@@ -189,6 +188,7 @@ elif [ ${mode} -eq ${CUSTOM_MODE} ]; then
             exit 1
         fi
     fi
+    INSTALL_PATH="$base_install_path"
 else
     echo -e $TOP_MARK
     echo " please input a right num "
