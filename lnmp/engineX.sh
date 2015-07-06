@@ -237,9 +237,9 @@ cd "$sourcedir"
 --conf-path="$NGINX_INSTALL_PATH"/conf/nginx.conf \
 --pid-path="$NGINX_INSTALL_PATH"/logs/nginx.pid \
 --with-http_ssl_module \
---with-pcre="$SRC_LIB_PATH"/"$pcre_sourcedir" \
---with-zlib="$SRC_LIB_PATH"/"$zlib_sourcedir" \
---with-openssl="$SRC_LIB_PATH"/"$openssl_sourcedir"
+--with-pcre="$pcre_path"/"$pcre_sourcedir" \
+--with-zlib="$zlib_path"/"$zlib_sourcedir" \
+--with-openssl="$openssl_path"/"$openssl_sourcedir"
 
 if [ $CPU_NUM -gt 1 ]; then
     make -j$CPU_NUM
