@@ -83,6 +83,9 @@ cd "$sourcedir"
 --enable-zip \
 --with-pcre-regex \
 --with-gd \
+--enable-gd-native-ttf \
+--with-freetype-dir \
+--with-zlib-dir \
 --with-jpeg-dir
 
 if [ $CPU_NUM -gt 1 ]; then
